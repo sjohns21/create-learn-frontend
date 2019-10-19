@@ -1,9 +1,12 @@
 import React from 'react';
-import Week from "./Week";
+import Week from "./components/Week";
+import TodoList from "./components/TodoList";
 
 function App() {
   return (
-    <Week/>
+    <div>
+      <Week/>
+    </div>
   )
 }
 

@@ -7,7 +7,7 @@ class Day extends Component {
     return (
       <div className="Day">
         {/*Day*/}
-        <Hours/>
+        <Hours dayIndex={this.props.dayIndex} hours={this.props.hours}/>
       </div>
     );
   }
