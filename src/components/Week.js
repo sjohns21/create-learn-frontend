@@ -2,8 +2,36 @@ import React, {Component} from 'react';
 import "./Week.css"
 import Day from "./Day";
 import {connect} from "react-redux";
+import {hourInit} from "../redux/actions";
+
 
 class Week extends Component {
+
+  componentDidMount() {
+    console.log('mounted')
+    this.initialFetch()
+  }
+
+  initialFetch = async () => {
+    try {
+      const response = await fetch('http://localhost:3001/teacher/5dab71fff96f90348007ed67', {
+        method: 'GET', // *GET, POST, PUT, DELETE, etc.
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        referrer: 'no-referrer', // no-referrer, *client
+      });
+      const teacher = await response.json()
+      console.log(teacher)
+      if (teacher._id) {
+        this.props.hourInit(teacher.hours)
+      } else {
+        console.error('didnt get')
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   render() {
     const days = []
@@ -44,4 +72,4 @@ const mapStateToProps = state => {
   return {hours}
 };
 
-export default connect(mapStateToProps)(Week);
+export default connect(mapStateToProps, {hourInit})(Week);

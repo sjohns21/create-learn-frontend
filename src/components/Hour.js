@@ -7,12 +7,21 @@ class Hour extends Component {
 
   addHour = async () => {
     try {
-      const response = await patchData('http://localhost:3001/teacher/hour', {
-        "teacherId": "5dab71fff96f90348007ed67",
-        "dayIndex": this.props.dayIndex,
-        "hourIndex": this.props.hourIndex
+      const response = await fetch('http://localhost:3001/teacher/hour', {
+        method: 'PATCH', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', // no-cors, *cors, same-origin
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        referrer: 'no-referrer', // no-referrer, *client
+        body: JSON.stringify({
+          "teacherId": "5dab71fff96f90348007ed67",
+          "dayIndex": this.props.dayIndex,
+          "hourIndex": this.props.hourIndex
+        }) // body data type must match "Content-Type" header
       });
-      if (response.updated) {
+      const data = await response.json()
+      if (data.updated) {
         this.props.addHour(this.props.dayIndex, this.props.hourIndex)
       } else {
         console.error('didnt add')
@@ -20,20 +29,6 @@ class Hour extends Component {
     } catch (error) {
       console.error(error);
     }
-
-    async function patchData(url = '', data = {}) {
-      const response = await fetch(url, {
-        method: 'PATCH', // *GET, POST, PUT, DELETE, etc.
-        mode: 'cors', // no-cors, *cors, same-origin
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        referrer: 'no-referrer', // no-referrer, *client
-        body: JSON.stringify(data) // body data type must match "Content-Type" header
-      });
-      return await response.json(); // parses JSON response into native JavaScript objects
-    }
-
   }
 
   render() {
