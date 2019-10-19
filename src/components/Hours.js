@@ -13,7 +13,7 @@ class Hours extends Component {
         isLit = true;
       }
       hours.push(
-        <Hour key={i} dayIndex={this.props.dayIndex} hour={i} isLit={isLit}/>
+        <Hour key={i} dayIndex={this.props.dayIndex} hourIndex={i} isLit={isLit}/>
       )
     }
     return (
