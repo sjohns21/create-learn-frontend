@@ -1,0 +1,5 @@
+.Hour {
+    width: 100%;
+    height: calc(100vh / 25);
+    border-bottom: 1px solid black;
+}

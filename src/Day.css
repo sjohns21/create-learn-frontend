@@ -1,0 +1,9 @@
+.Day {
+    width: 13%;
+    color: red;
+    border-left: 1px solid black;
+}
+
+.Day:first-of-type {
+    color: green;
+}
