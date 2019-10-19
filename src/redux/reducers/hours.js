@@ -1,4 +1,4 @@
-import {ADD_HOUR, TOGGLE_TODO, HOUR_INIT} from "../actionTypes";
+import {HOUR_TOGGLE, TOGGLE_TODO, HOUR_INIT} from "../actionTypes";
 
 const days = []
 for (let i = 0; i < 7; i++) {
@@ -12,11 +12,11 @@ const initialState = days;
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case ADD_HOUR: {
+    case HOUR_TOGGLE: {
       const {dayIndex, hourIndex} = action.payload;
       // const {hours} = state;
       const newDay = [...state[dayIndex]]
-      newDay[hourIndex] = true
+      newDay[hourIndex] = !newDay[hourIndex]
       // state[dayIndex][hourIndex] = true;
       const newState = [...state]
       newState[dayIndex] = newDay

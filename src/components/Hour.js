@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import "./Hour.css"
 import {connect} from "react-redux";
-import {addHour} from "../redux/actions";
+import {hourToggle} from "../redux/actions";
 
 class Hour extends Component {
 
-  addHour = async () => {
+  hourToggle = async () => {
     try {
       const response = await fetch('http://localhost:3001/teacher/hour', {
         method: 'PATCH', // *GET, POST, PUT, DELETE, etc.
@@ -22,9 +22,9 @@ class Hour extends Component {
       });
       const data = await response.json()
       if (data.updated) {
-        this.props.addHour(this.props.dayIndex, this.props.hourIndex)
+        this.props.hourToggle(this.props.dayIndex, this.props.hourIndex)
       } else {
-        console.error('didnt add')
+        console.error('didnt toggle')
       }
     } catch (error) {
       console.error(error);
@@ -33,7 +33,7 @@ class Hour extends Component {
 
   render() {
     return (
-      <div className="Hour" onClick={this.addHour}>
+      <div className="Hour" onClick={this.hourToggle}>
         {
           this.props.isLit && 'lit'
         }
@@ -44,5 +44,5 @@ class Hour extends Component {
 
 export default connect(
   null,
-  {addHour}
+  {hourToggle}
 )(Hour);

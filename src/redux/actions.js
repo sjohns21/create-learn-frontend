@@ -1,4 +1,4 @@
-import {ADD_TODO, TOGGLE_TODO, SET_FILTER, ADD_HOUR, HOUR_INIT} from "./actionTypes";
+import {ADD_TODO, TOGGLE_TODO, SET_FILTER, HOUR_TOGGLE, HOUR_INIT} from "./actionTypes";
 
 let nextTodoId = 0;
 
@@ -17,8 +17,8 @@ export const toggleTodo = id => ({
 
 export const setFilter = filter => ({type: SET_FILTER, payload: {filter}});
 
-export const addHour = (dayIndex, hourIndex) => ({
-  type: ADD_HOUR,
+export const hourToggle = (dayIndex, hourIndex) => ({
+  type: HOUR_TOGGLE,
   payload: {dayIndex, hourIndex}
 });
 
