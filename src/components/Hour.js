@@ -2,12 +2,13 @@ import React, {Component} from 'react';
 import "./Hour.css"
 import {connect} from "react-redux";
 import {hourToggle} from "../redux/actions";
+import {API_BASE} from "../constants"
 
 class Hour extends Component {
 
   hourToggle = async () => {
     try {
-      const response = await fetch('http://localhost:3001/teacher/hour', {
+      const response = await fetch(`${API_BASE}/teacher/hour`, {
         method: 'PATCH', // *GET, POST, PUT, DELETE, etc.
         mode: 'cors', // no-cors, *cors, same-origin
         headers: {
@@ -15,7 +16,6 @@ class Hour extends Component {
         },
         referrer: 'no-referrer', // no-referrer, *client
         body: JSON.stringify({
-          "teacherId": "5dab71fff96f90348007ed67",
           "dayIndex": this.props.dayIndex,
           "hourIndex": this.props.hourIndex
         }) // body data type must match "Content-Type" header
@@ -53,7 +53,7 @@ class Hour extends Component {
       cssClass += " showTime"
     }
     return (
-      <div data-hourIndex={this.props.hourIndex} className={cssClass}
+      <div data-hourindex={this.props.hourIndex} className={cssClass}
            onClick={(this.props.status !== 2) ? this.hourToggle : null}>
       </div>
     );

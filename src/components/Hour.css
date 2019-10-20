@@ -6,7 +6,6 @@
 
 .Hour:first-of-type {
     border-top: 1px solid black;
-
 }
 
 .Hour.notAvailable {
@@ -22,5 +21,5 @@
 }
 
 .Hour.showTime::before {
-    content: attr(data-hourIndex)
+    content: attr(data-hourindex)
 }

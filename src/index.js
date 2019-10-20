@@ -31,6 +31,8 @@ import store from "./redux/store";
 
 import App from "./App";
 
+console.log(process.env)
+
 const rootElement = document.getElementById("root");
 ReactDOM.render(
   <Provider store={store}>

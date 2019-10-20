@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import "./Day.css"
 import Hours from "./Hours";
+import SimpleModal from "./Modal";
 
 class Day extends Component {
   render() {

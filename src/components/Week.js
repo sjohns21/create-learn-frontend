@@ -3,6 +3,8 @@ import "./Week.css"
 import Day from "./Day";
 import {connect} from "react-redux";
 import {hourInit} from "../redux/actions";
+import SimpleModal from "./Modal";
+import {API_BASE} from "../constants"
 
 
 class Week extends Component {
@@ -30,7 +32,7 @@ class Week extends Component {
     console.log('windowIsAvailable', windowIsAvailable)
     if (windowIsAvailable) {
       try {
-        const response = await fetch('http://localhost:3001/teacher/class', {
+        const response = await fetch(`${API_BASE}/teacher/class`, {
           method: 'POST', // *GET, POST, PUT, DELETE, etc.
           mode: 'cors', // no-cors, *cors, same-origin
           headers: {
@@ -38,7 +40,6 @@ class Week extends Component {
           },
           referrer: 'no-referrer', // no-referrer, *client
           body: JSON.stringify({
-            "teacherId": "5dab71fff96f90348007ed67",
             dayIndex,
             start,
             end
@@ -67,7 +68,7 @@ class Week extends Component {
 
   fetchHours = async () => {
     try {
-      const response = await fetch('http://localhost:3001/teacher/5dab71fff96f90348007ed67', {
+      const response = await fetch(`${API_BASE}/teacher`, {
         method: 'GET', // *GET, POST, PUT, DELETE, etc.
         headers: {
           'Content-Type': 'application/json'
@@ -95,16 +96,9 @@ class Week extends Component {
         <div onClick={this.addClass}>
           addClass
         </div>
+        <SimpleModal/>
+
         <div className="Week">
-          {/*<Hours/>*/}
-          {/*<Day dayIndex={0}/>*/}
-          {/*<Day/>*/}
-          {/*<Day/>*/}
-          {/*<Day/>*/}
-          {/*<Day/>*/}
-          {/*<Day/>*/}
-          {/*<Day/>*/}
-          {/*<Day/>*/}
           {days}
         </div>
       </>
