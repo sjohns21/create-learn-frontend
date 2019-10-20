@@ -1,5 +1,26 @@
 .Hour {
     width: 100%;
-    height: calc(100vh / 25);
+    height: calc(100vh / 30);
     border-bottom: 1px solid black;
+}
+
+.Hour:first-of-type {
+    border-top: 1px solid black;
+
+}
+
+.Hour.notAvailable {
+    background-color: gray;
+}
+
+.Hour.isAvailable {
+    background-color: green;
+}
+
+.Hour.class {
+    background-color: blue;
+}
+
+.Hour.showTime::before {
+    content: attr(data-hourIndex)
 }

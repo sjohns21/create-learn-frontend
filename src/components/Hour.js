@@ -33,17 +33,28 @@ class Hour extends Component {
 
   render() {
 
+    let cssClass = "Hour "
+    switch (this.props.status) {
+      case 0:
+        cssClass += "notAvailable"
+        break;
+      case 1:
+        cssClass += "isAvailable"
+        break;
+      case 2:
+        cssClass += "class"
+        break;
+      default:
+        cssClass += "notAvailable"
+        break;
+    }
+
+    if (this.props.dayIndex === 0) {
+      cssClass += " showTime"
+    }
     return (
-      <div className="Hour" onClick={(this.props.status !== 2) ? this.hourToggle : null}>
-        {/*{*/}
-        {/*  this.props.status === 0 && 'notAvailable'*/}
-        {/*}*/}
-        {
-          this.props.status === 1 && 'isAvailable'
-        }
-        {
-          this.props.status === 2 && 'class'
-        }
+      <div data-hourIndex={this.props.hourIndex} className={cssClass}
+           onClick={(this.props.status !== 2) ? this.hourToggle : null}>
       </div>
     );
   }

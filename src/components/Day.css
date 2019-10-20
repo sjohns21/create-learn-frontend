@@ -1,9 +1,8 @@
 .Day {
-    width: 13%;
-    color: red;
+    width: calc(100% / 7);
     border-left: 1px solid black;
 }
 
-.Day:first-of-type {
-    color: green;
+.Day:last-of-type {
+    border-right: 1px solid black;
 }
