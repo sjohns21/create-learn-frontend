@@ -1,4 +1,4 @@
-import {HOUR_TOGGLE, TOGGLE_TODO, HOUR_INIT} from "../actionTypes";
+import {HOUR_TOGGLE, HOUR_INIT} from "../actionTypes";
 
 const days = []
 for (let i = 0; i < 7; i++) {

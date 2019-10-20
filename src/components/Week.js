@@ -11,6 +11,11 @@ class Week extends Component {
     const dayIndex = window.prompt('dayIndex');
     const start = window.prompt('start');
     const end = window.prompt('end');
+    if (!dayIndex || !start || !end) return
+    if (dayIndex < 0 || dayIndex > 6) return
+    if (start < 0 || start > 23) return
+    if (end < 0 || end > 23) return
+    if (start > end) return
 
     let windowIsAvailable = true
     if (dayIndex >= 0 && dayIndex <= 6) {
