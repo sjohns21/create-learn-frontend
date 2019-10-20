@@ -8,7 +8,7 @@ import {hourInit} from "../redux/actions";
 class Week extends Component {
 
   addClass = async () => {
-    const dayIndex = window.prompt('dayIndex', 0);
+    const dayIndex = window.prompt('dayIndex');
     const start = window.prompt('start');
     const end = window.prompt('end');
 
@@ -34,15 +34,17 @@ class Week extends Component {
           referrer: 'no-referrer', // no-referrer, *client
           body: JSON.stringify({
             "teacherId": "5dab71fff96f90348007ed67",
+            dayIndex,
             start,
             end
           }) // body data type must match "Content-Type" header
         });
         const data = await response.json()
-        if (data.updated) {
-          this.props.hourToggle(this.props.dayIndex, this.props.hourIndex)
+        if (data.classAdded) {
+          // this.props.hourToggle(this.props.dayIndex, this.props.hourIndex)
+          this.fetchHours()
         } else {
-          console.error('didnt toggle')
+          console.error('didnt add class')
         }
       } catch (error) {
         console.error(error);
@@ -51,14 +53,14 @@ class Week extends Component {
   }
 
   componentDidMount() {
-    this.initialFetch()
+    this.fetchHours()
   }
 
   componentDidUpdate(prevProps) {
 
   }
 
-  initialFetch = async () => {
+  fetchHours = async () => {
     try {
       const response = await fetch('http://localhost:3001/teacher/5dab71fff96f90348007ed67', {
         method: 'GET', // *GET, POST, PUT, DELETE, etc.
