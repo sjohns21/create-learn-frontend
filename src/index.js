@@ -32,7 +32,6 @@ import store from "./redux/store";
 import App from "./App";
 
 console.log(process.env)
-console.log(API_BASE)
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(
