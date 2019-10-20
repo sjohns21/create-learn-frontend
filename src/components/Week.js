@@ -93,10 +93,22 @@ class Week extends Component {
     }
     return (
       <>
-        <div onClick={this.addClass}>
+        <button onClick={this.addClass}>
           addClass
-        </div>
-        <SimpleModal/>
+        </button>
+        <span className="key">
+          key
+          <span className="notAvailable">
+            not available
+          </span>
+          <span className="isAvailable">
+            is available
+          </span>
+          <span className="class">
+            class
+          </span>
+        </span>
+        {/*<SimpleModal/>*/}
 
         <div className="Week">
           {days}
