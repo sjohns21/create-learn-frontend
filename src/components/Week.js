@@ -7,8 +7,55 @@ import {hourInit} from "../redux/actions";
 
 class Week extends Component {
 
+  addClass = async () => {
+    const dayIndex = window.prompt('dayIndex', 0);
+    const start = window.prompt('start');
+    const end = window.prompt('end');
+
+    let windowIsAvailable = true
+    if (dayIndex >= 0 && dayIndex <= 6) {
+      for (let i = start; i <= end; i++) {
+        const status = this.props.hours[dayIndex][i]
+        if (status === 0 || status === 2) {
+          windowIsAvailable = false
+          break
+        }
+      }
+    }
+    console.log('windowIsAvailable', windowIsAvailable)
+    if (windowIsAvailable) {
+      try {
+        const response = await fetch('http://localhost:3001/teacher/class', {
+          method: 'POST', // *GET, POST, PUT, DELETE, etc.
+          mode: 'cors', // no-cors, *cors, same-origin
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          referrer: 'no-referrer', // no-referrer, *client
+          body: JSON.stringify({
+            "teacherId": "5dab71fff96f90348007ed67",
+            start,
+            end
+          }) // body data type must match "Content-Type" header
+        });
+        const data = await response.json()
+        if (data.updated) {
+          this.props.hourToggle(this.props.dayIndex, this.props.hourIndex)
+        } else {
+          console.error('didnt toggle')
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  }
+
   componentDidMount() {
     this.initialFetch()
+  }
+
+  componentDidUpdate(prevProps) {
+
   }
 
   initialFetch = async () => {
@@ -37,18 +84,23 @@ class Week extends Component {
       days.push(<Day dayIndex={i} hours={this.props.hours[i]} key={i}/>)
     }
     return (
-      <div className="Week">
-        {/*<Hours/>*/}
-        {/*<Day dayIndex={0}/>*/}
-        {/*<Day/>*/}
-        {/*<Day/>*/}
-        {/*<Day/>*/}
-        {/*<Day/>*/}
-        {/*<Day/>*/}
-        {/*<Day/>*/}
-        {/*<Day/>*/}
-        {days}
-      </div>
+      <>
+        <div onClick={this.addClass}>
+          addClass
+        </div>
+        <div className="Week">
+          {/*<Hours/>*/}
+          {/*<Day dayIndex={0}/>*/}
+          {/*<Day/>*/}
+          {/*<Day/>*/}
+          {/*<Day/>*/}
+          {/*<Day/>*/}
+          {/*<Day/>*/}
+          {/*<Day/>*/}
+          {/*<Day/>*/}
+          {days}
+        </div>
+      </>
     );
   }
 }
