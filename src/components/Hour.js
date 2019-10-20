@@ -32,10 +32,17 @@ class Hour extends Component {
   }
 
   render() {
+
     return (
-      <div className="Hour" onClick={this.hourToggle}>
+      <div className="Hour" onClick={(this.props.status !== 2) ? this.hourToggle : null}>
+        {/*{*/}
+        {/*  this.props.status === 0 && 'notAvailable'*/}
+        {/*}*/}
         {
-          this.props.isLit && 'lit'
+          this.props.status === 1 && 'isAvailable'
+        }
+        {
+          this.props.status === 2 && 'class'
         }
       </div>
     );

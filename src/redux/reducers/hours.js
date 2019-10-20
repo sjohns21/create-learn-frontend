@@ -4,7 +4,7 @@ const days = []
 for (let i = 0; i < 7; i++) {
   const day = []
   for (let j = 0; j < 24; j++) {
-    day.push(false)
+    day.push(0)
   }
   days.push(day)
 }
@@ -16,11 +16,19 @@ export default function (state = initialState, action) {
       const {dayIndex, hourIndex} = action.payload;
       // const {hours} = state;
       const newDay = [...state[dayIndex]]
-      newDay[hourIndex] = !newDay[hourIndex]
+      const oldState = newDay[hourIndex]
+      let newState
+      if (oldState === 0) {
+        newState = 1
+      } else if (oldState === 1) {
+        newState = 0
+      }
+
+      newDay[hourIndex] = newState
       // state[dayIndex][hourIndex] = true;
-      const newState = [...state]
-      newState[dayIndex] = newDay
-      return newState
+      const newTotalState = [...state]
+      newTotalState[dayIndex] = newDay
+      return newTotalState
     }
     case HOUR_INIT: {
       const {hours} = action.payload

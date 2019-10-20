@@ -8,7 +8,6 @@ import {hourInit} from "../redux/actions";
 class Week extends Component {
 
   componentDidMount() {
-    console.log('mounted')
     this.initialFetch()
   }
 
@@ -22,7 +21,6 @@ class Week extends Component {
         referrer: 'no-referrer', // no-referrer, *client
       });
       const teacher = await response.json()
-      console.log(teacher)
       if (teacher._id) {
         this.props.hourInit(teacher.hours)
       } else {

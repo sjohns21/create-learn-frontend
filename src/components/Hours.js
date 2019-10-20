@@ -8,12 +8,12 @@ class Hours extends Component {
   render() {
     const hours = [];
     for (let i = 0; i < 24; i++) {
-      let isLit = false
-      if (this.props.hours[i]) {
-        isLit = true;
-      }
+      // let isAvailable = false
+      // if (this.props.hours[i] === 1) {
+      //   isAvailable = true;
+      // }
       hours.push(
-        <Hour key={i} dayIndex={this.props.dayIndex} hourIndex={i} isLit={isLit}/>
+        <Hour key={i} dayIndex={this.props.dayIndex} hourIndex={i} status={this.props.hours[i]}/>
       )
     }
     return (
