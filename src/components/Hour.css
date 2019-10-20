@@ -4,6 +4,10 @@
     border-bottom: 1px solid black;
 }
 
+.Hour:hover:not(.class) {
+    cursor: pointer;
+}
+
 .Hour:first-of-type {
     border-top: 1px solid black;
 }
@@ -12,8 +16,16 @@
     background-color: gray;
 }
 
+.Hour.notAvailable:hover {
+    background-color: lightgreen;
+}
+
 .Hour.isAvailable {
     background-color: green;
+}
+
+.Hour.isAvailable:hover {
+    background-color: lightgray;
 }
 
 .Hour.class {
