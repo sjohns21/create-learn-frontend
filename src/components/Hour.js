@@ -31,7 +31,6 @@ class Hour extends Component {
       });
       const data = await response.json();
       if (data.updated) {
-        window.alert('availability updated!');
         this.props.hourToggle(this.props.dayIndex, this.props.hourIndex)
       } else {
         window.alert('availability not updated, please try again!')

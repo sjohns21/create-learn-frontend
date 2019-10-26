@@ -1,8 +1,3 @@
-.Week {
-    display: flex;
-    height: 100%;
-}
-
 .addClass > * {
     margin-right: 5px;
 }
@@ -36,6 +31,10 @@
 }
 
 .key .class {
-    /*color: white;*/
     background-color: cornflowerblue;
+}
+
+.days {
+    display: flex;
+    height: 100%;
 }

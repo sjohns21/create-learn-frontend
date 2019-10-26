@@ -53,6 +53,7 @@ class Week extends Component {
           console.error('class not added, please try again!')
         }
       } catch (error) {
+        console.error('class not added, please try again!')
         console.error(error);
       }
     }
@@ -74,9 +75,10 @@ class Week extends Component {
       if (teacher._id) {
         this.props.hourInit(teacher.hours)
       } else {
-        console.error('didnt get')
+        window.alert("couldn't fetch teacher hours, please try again!")
       }
     } catch (error) {
+      window.alert("couldn't fetch teacher hours, please try again!")
       console.error(error);
     }
   };
@@ -150,7 +152,7 @@ class Week extends Component {
           </span>
         </div>
 
-        <div className="Week">
+        <div className="days">
           {days}
         </div>
       </>
