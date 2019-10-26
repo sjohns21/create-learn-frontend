@@ -4,7 +4,6 @@ import {connect} from "react-redux";
 import {hourToggle} from "../redux/actions";
 import {API_BASE} from "../constants"
 
-// const prettyHours = []
 export function toPrettyHour(hourIndex) {
   let hour = hourIndex;
   let amPm = "AM";
@@ -13,8 +12,6 @@ export function toPrettyHour(hourIndex) {
     hour -= 12
   }
   if (hour === 0) hour = 12;
-  hour = String(hour);
-  if (hour.length === 1) hour = " " + hour;
   return `${hour} ${amPm}`
 }
 

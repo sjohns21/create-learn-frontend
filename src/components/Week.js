@@ -4,7 +4,6 @@ import Day from "./Day";
 import {toPrettyHour} from "./Hour"
 import {connect} from "react-redux";
 import {hourInit} from "../redux/actions";
-// import SimpleModal from "./Modal";
 import {API_BASE} from "../constants"
 
 
@@ -121,7 +120,7 @@ class Week extends Component {
             {hours}
           </select>
           <button onClick={this.addClass}>
-            addClass
+            add class
           </button>
         </div>
         <div className="key">
