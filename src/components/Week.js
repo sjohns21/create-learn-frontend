@@ -6,7 +6,6 @@ import {connect} from "react-redux";
 import {hourInit} from "../redux/actions";
 import {API_BASE} from "../constants"
 
-
 class Week extends Component {
   constructor(props) {
     super(props);
@@ -16,7 +15,6 @@ class Week extends Component {
       end: 0
     }
   }
-
 
   handleChange = (e) => {
     this.setState({[e.target.name]: Number(e.target.value)})
@@ -64,10 +62,6 @@ class Week extends Component {
     this.fetchHours()
   }
 
-  componentDidUpdate(prevProps) {
-
-  }
-
   fetchHours = async () => {
     try {
       const response = await fetch(`${API_BASE}/teacher`, {
@@ -100,10 +94,10 @@ class Week extends Component {
         window.alert('reset not successful, please try again!')
       }
     } catch (error) {
-      window.alert('reset not successful, please try again!')
+      window.alert('reset not successful, please try again!');
       console.error(error);
     }
-  }
+  };
 
   render() {
     const days = [];
