@@ -33,7 +33,7 @@
 }
 
 .Hour.class {
-    background-color: blue;
+    background-color: cornflowerblue;
 }
 
 .Hour.showTime::before {

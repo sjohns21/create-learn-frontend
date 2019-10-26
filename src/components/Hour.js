@@ -15,7 +15,6 @@ export function toPrettyHour(hourIndex) {
   if (hour === 0) hour = 12;
   hour = String(hour);
   if (hour.length === 1) hour = " " + hour;
-  debugger
   return `${hour} ${amPm}`
 }
 
@@ -24,12 +23,10 @@ class Hour extends Component {
   hourToggle = async () => {
     try {
       const response = await fetch(`${API_BASE}/teacher/hour`, {
-        method: 'PATCH', // *GET, POST, PUT, DELETE, etc.
-        mode: 'cors', // no-cors, *cors, same-origin
+        method: 'PATCH',
         headers: {
           'Content-Type': 'application/json'
         },
-        referrer: 'no-referrer', // no-referrer, *client
         body: JSON.stringify({
           "dayIndex": this.props.dayIndex,
           "hourIndex": this.props.hourIndex

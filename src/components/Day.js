@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import "./Day.css"
 import Hours from "./Hours";
 
-// import SimpleModal from "./Modal";
 const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
 class Day extends Component {
@@ -15,7 +14,5 @@ class Day extends Component {
     );
   }
 }
-
-Day.propTypes = {};
 
 export default Day;

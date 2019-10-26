@@ -7,6 +7,10 @@
     margin-right: 5px;
 }
 
+.addClass > select {
+    margin-right: 10px;
+}
+
 .key {
     display: flex;
     margin-bottom: 10px;
@@ -28,6 +32,6 @@
 }
 
 .key .class {
-    color: white;
-    background-color: blue;
+    /*color: white;*/
+    background-color: cornflowerblue;
 }

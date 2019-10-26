@@ -35,16 +35,13 @@ class Week extends Component {
         break
       }
     }
-    console.log('windowIsAvailable', windowIsAvailable);
     if (windowIsAvailable) {
       try {
         const response = await fetch(`${API_BASE}/teacher/class`, {
           method: 'POST', // *GET, POST, PUT, DELETE, etc.
-          mode: 'cors', // no-cors, *cors, same-origin
           headers: {
             'Content-Type': 'application/json'
           },
-          referrer: 'no-referrer', // no-referrer, *client
           body: JSON.stringify({
             dayIndex,
             start,
@@ -79,7 +76,6 @@ class Week extends Component {
         headers: {
           'Content-Type': 'application/json'
         },
-        referrer: 'no-referrer', // no-referrer, *client
       });
       const teacher = await response.json();
       if (teacher._id) {
@@ -116,11 +112,11 @@ class Week extends Component {
             <option value="5">Saturday</option>
             <option value="6">Sunday</option>
           </select>
-          <label>start</label>
+          <label>start:</label>
           <select name="start" onChange={this.handleChange}>
             {hours}
           </select>
-          <label>stop</label>
+          <label>stop:</label>
           <select name="end" onChange={this.handleChange}>
             {hours}
           </select>
@@ -139,7 +135,6 @@ class Week extends Component {
             class
           </span>
         </div>
-        {/*<SimpleModal/>*/}
 
         <div className="Week">
           {days}
@@ -149,20 +144,7 @@ class Week extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  // const {visibilityFilter} = state;
-  // const todos = getTodosByVisibilityFilter(state, visibilityFilter);
-  // return {todos};
-  //   const allTodos = getTodos(state);
-  //   return {
-  //     todos:
-  //       visibilityFilter === VISIBILITY_FILTERS.ALL
-  //         ? allTodos
-  //         : visibilityFilter === VISIBILITY_FILTERS.COMPLETED
-  //           ? allTodos.filter(todo => todo.completed)
-  //           : allTodos.filter(todo => !todo.completed)
-  //   };
-  const {hours} = state;
+const mapStateToProps = ({hours}) => {
   return {hours}
 };
 
