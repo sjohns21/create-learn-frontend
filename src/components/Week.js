@@ -8,25 +8,31 @@ import {API_BASE} from "../constants"
 
 
 class Week extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      dayIndex: 0,
+      start: 0,
+      end: 0
+    }
+  }
+
+
+  handleChange = (e) => {
+    this.setState({[e.target.name]: Number(e.target.value)})
+  }
 
   addClass = async () => {
-    const dayIndex = window.prompt('dayIndex');
-    const start = window.prompt('start');
-    const end = window.prompt('end');
-    if (!dayIndex || !start || !end) return
-    if (dayIndex < 0 || dayIndex > 6) return
-    if (start < 0 || start > 23) return
-    if (end < 0 || end > 23) return
-    if (start > end) return
+    const {dayIndex, start, end} = this.state;
+    console.log({dayIndex, start, end})
+    console.log(dayIndex, start, end)
 
     let windowIsAvailable = true
-    if (dayIndex >= 0 && dayIndex <= 6) {
-      for (let i = start; i <= end; i++) {
-        const status = this.props.hours[dayIndex][i]
-        if (status === 0 || status === 2) {
-          windowIsAvailable = false
-          break
-        }
+    for (let i = start; i <= end; i++) {
+      const status = this.props.hours[dayIndex][i]
+      if (status === 0 || status === 2) {
+        windowIsAvailable = false
+        break
       }
     }
     console.log('windowIsAvailable', windowIsAvailable)
@@ -43,7 +49,7 @@ class Week extends Component {
             dayIndex,
             start,
             end
-          }) // body data type must match "Content-Type" header
+          })
         });
         const data = await response.json()
         if (data.classAdded) {
@@ -91,11 +97,34 @@ class Week extends Component {
     for (let i = 0; i < 7; i++) {
       days.push(<Day dayIndex={i} hours={this.props.hours[i]} key={i}/>)
     }
+    const hours = []
+    for (let i = 0; i < 24; i++) {
+      hours.push(
+        <option value={i} key={i}>{i}</option>
+      )
+    }
+
     return (
       <>
         <button onClick={this.addClass}>
           addClass
+
         </button>
+        <select name="dayIndex" onChange={this.handleChange}>
+          <option value="0">Monday</option>
+          <option value="1">Tuesday</option>
+          <option value="2">Wednesday</option>
+          <option value="3">Thursday</option>
+          <option value="4">Friday</option>
+          <option value="5">Saturday</option>
+          <option value="6">Sunday</option>
+        </select>
+        <select name="start" onChange={this.handleChange}>
+          {hours}
+        </select>
+        <select name="end" onChange={this.handleChange}>
+          {hours}
+        </select>
         <span className="key">
           key
           <span className="notAvailable">
