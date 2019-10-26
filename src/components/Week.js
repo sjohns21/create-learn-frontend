@@ -37,7 +37,7 @@ class Week extends Component {
     if (windowIsAvailable) {
       try {
         const response = await fetch(`${API_BASE}/teacher/class`, {
-          method: 'POST', // *GET, POST, PUT, DELETE, etc.
+          method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
@@ -71,7 +71,7 @@ class Week extends Component {
   fetchHours = async () => {
     try {
       const response = await fetch(`${API_BASE}/teacher`, {
-        method: 'GET', // *GET, POST, PUT, DELETE, etc.
+        method: 'GET',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -87,6 +87,24 @@ class Week extends Component {
     }
   };
 
+  reset = async () => {
+    try {
+      const response = await fetch(`${API_BASE}/teacher/reset`, {
+        method: 'POST'
+      });
+      const data = await response.json();
+      if (data.reset) {
+        window.alert('reset successful!');
+        this.fetchHours()
+      } else {
+        window.alert('reset not successful, please try again!')
+      }
+    } catch (error) {
+      window.alert('reset not successful, please try again!')
+      console.error(error);
+    }
+  }
+
   render() {
     const days = [];
     for (let i = 0; i < 7; i++) {
@@ -101,7 +119,7 @@ class Week extends Component {
 
     return (
       <>
-        <div className="addClass">
+        <span className="addClass">
           <select name="dayIndex" onChange={this.handleChange}>
             <option value="0">Monday</option>
             <option value="1">Tuesday</option>
@@ -122,7 +140,10 @@ class Week extends Component {
           <button onClick={this.addClass}>
             add class
           </button>
-        </div>
+          </span>
+        <button className="reset" onClick={this.reset}>
+          reset schedule
+        </button>
         <div className="key">
           <span className="notAvailable">
             not available

@@ -11,6 +11,10 @@
     margin-right: 10px;
 }
 
+.reset {
+    float: right;
+}
+
 .key {
     display: flex;
     margin-bottom: 10px;
