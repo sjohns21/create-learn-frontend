@@ -5,14 +5,18 @@ import {hourToggle} from "../redux/actions";
 import {API_BASE} from "../constants"
 
 // const prettyHours = []
-function toPrettyHour(hourIndex) {
-  let amPm = "AM"
-  if (hourIndex >= 12) {
-    amPm = "PM"
-    hourIndex -= 12
+export function toPrettyHour(hourIndex) {
+  let hour = hourIndex;
+  let amPm = "AM";
+  if (hour >= 12) {
+    amPm = "PM";
+    hour -= 12
   }
-  if (hourIndex === 0) hourIndex = 12
-  return `${hourIndex} ${amPm}`
+  if (hour === 0) hour = 12;
+  hour = String(hour);
+  if (hour.length === 1) hour = " " + hour;
+  debugger
+  return `${hour} ${amPm}`
 }
 
 class Hour extends Component {
@@ -29,34 +33,36 @@ class Hour extends Component {
         body: JSON.stringify({
           "dayIndex": this.props.dayIndex,
           "hourIndex": this.props.hourIndex
-        }) // body data type must match "Content-Type" header
+        })
       });
-      const data = await response.json()
+      const data = await response.json();
       if (data.updated) {
+        window.alert('availability updated!');
         this.props.hourToggle(this.props.dayIndex, this.props.hourIndex)
       } else {
-        console.error('didnt toggle')
+        window.alert('availability not updated, please try again!')
       }
     } catch (error) {
+      window.alert('availability not updated, please try again!');
       console.error(error);
     }
-  }
+  };
 
   render() {
 
-    let cssClass = "Hour "
+    let cssClass = "Hour ";
     switch (this.props.status) {
       case 0:
-        cssClass += "notAvailable"
+        cssClass += "notAvailable";
         break;
       case 1:
-        cssClass += "isAvailable"
+        cssClass += "isAvailable";
         break;
       case 2:
-        cssClass += "class"
+        cssClass += "class";
         break;
       default:
-        cssClass += "notAvailable"
+        cssClass += "notAvailable";
         break;
     }
 

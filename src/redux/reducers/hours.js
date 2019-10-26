@@ -1,8 +1,8 @@
 import {HOUR_TOGGLE, HOUR_INIT} from "../actionTypes";
 
-const days = []
+const days = [];
 for (let i = 0; i < 7; i++) {
-  const day = []
+  const day = [];
   for (let j = 0; j < 24; j++) {
     day.push(0)
   }
@@ -15,23 +15,23 @@ export default function (state = initialState, action) {
     case HOUR_TOGGLE: {
       const {dayIndex, hourIndex} = action.payload;
       // const {hours} = state;
-      const newDay = [...state[dayIndex]]
-      const oldState = newDay[hourIndex]
-      let newState
+      const newDay = [...state[dayIndex]];
+      const oldState = newDay[hourIndex];
+      let newState;
       if (oldState === 0) {
         newState = 1
       } else if (oldState === 1) {
         newState = 0
       }
 
-      newDay[hourIndex] = newState
+      newDay[hourIndex] = newState;
       // state[dayIndex][hourIndex] = true;
-      const newTotalState = [...state]
-      newTotalState[dayIndex] = newDay
+      const newTotalState = [...state];
+      newTotalState[dayIndex] = newDay;
       return newTotalState
     }
     case HOUR_INIT: {
-      const {hours} = action.payload
+      const {hours} = action.payload;
       return hours
       // const {dayIndex, hourIndex} = action.payload;
       // // const {hours} = state;

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import "./Week.css"
 import Day from "./Day";
+import {toPrettyHour} from "./Hour"
 import {connect} from "react-redux";
 import {hourInit} from "../redux/actions";
 // import SimpleModal from "./Modal";
@@ -20,22 +21,21 @@ class Week extends Component {
 
   handleChange = (e) => {
     this.setState({[e.target.name]: Number(e.target.value)})
-  }
+  };
 
   addClass = async () => {
     const {dayIndex, start, end} = this.state;
-    console.log({dayIndex, start, end})
-    console.log(dayIndex, start, end)
 
-    let windowIsAvailable = true
+    let windowIsAvailable = true;
     for (let i = start; i <= end; i++) {
-      const status = this.props.hours[dayIndex][i]
+      const status = this.props.hours[dayIndex][i];
       if (status === 0 || status === 2) {
-        windowIsAvailable = false
+        windowIsAvailable = false;
+        window.alert("this time block is not available!");
         break
       }
     }
-    console.log('windowIsAvailable', windowIsAvailable)
+    console.log('windowIsAvailable', windowIsAvailable);
     if (windowIsAvailable) {
       try {
         const response = await fetch(`${API_BASE}/teacher/class`, {
@@ -51,18 +51,18 @@ class Week extends Component {
             end
           })
         });
-        const data = await response.json()
+        const data = await response.json();
         if (data.classAdded) {
-          // this.props.hourToggle(this.props.dayIndex, this.props.hourIndex)
+          window.alert('class added!');
           this.fetchHours()
         } else {
-          console.error('didnt add class')
+          console.error('class not added, please try again!')
         }
       } catch (error) {
         console.error(error);
       }
     }
-  }
+  };
 
   componentDidMount() {
     this.fetchHours()
@@ -81,7 +81,7 @@ class Week extends Component {
         },
         referrer: 'no-referrer', // no-referrer, *client
       });
-      const teacher = await response.json()
+      const teacher = await response.json();
       if (teacher._id) {
         this.props.hourInit(teacher.hours)
       } else {
@@ -90,17 +90,17 @@ class Week extends Component {
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   render() {
-    const days = []
+    const days = [];
     for (let i = 0; i < 7; i++) {
       days.push(<Day dayIndex={i} hours={this.props.hours[i]} key={i}/>)
     }
-    const hours = []
+    const hours = [];
     for (let i = 0; i < 24; i++) {
       hours.push(
-        <option value={i} key={i}>{i}</option>
+        <option value={i} key={i}> {toPrettyHour(i)} </option>
       )
     }
 
@@ -116,9 +116,11 @@ class Week extends Component {
             <option value="5">Saturday</option>
             <option value="6">Sunday</option>
           </select>
+          <label>start</label>
           <select name="start" onChange={this.handleChange}>
             {hours}
           </select>
+          <label>stop</label>
           <select name="end" onChange={this.handleChange}>
             {hours}
           </select>
@@ -160,7 +162,7 @@ const mapStateToProps = state => {
   //           ? allTodos.filter(todo => todo.completed)
   //           : allTodos.filter(todo => !todo.completed)
   //   };
-  const {hours} = state
+  const {hours} = state;
   return {hours}
 };
 
