@@ -1,8 +1,15 @@
 .Day {
     width: calc(100% / 7);
     border-left: 1px solid black;
+    border-top: 1px solid black;
 }
 
 .Day:last-of-type {
     border-right: 1px solid black;
 }
+
+.Day .name {
+    text-align: center;
+}
+
+

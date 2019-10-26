@@ -4,6 +4,17 @@ import {connect} from "react-redux";
 import {hourToggle} from "../redux/actions";
 import {API_BASE} from "../constants"
 
+// const prettyHours = []
+function toPrettyHour(hourIndex) {
+  let amPm = "AM"
+  if (hourIndex >= 12) {
+    amPm = "PM"
+    hourIndex -= 12
+  }
+  if (hourIndex === 0) hourIndex = 12
+  return `${hourIndex} ${amPm}`
+}
+
 class Hour extends Component {
 
   hourToggle = async () => {
@@ -53,7 +64,7 @@ class Hour extends Component {
       cssClass += " showTime"
     }
     return (
-      <div data-hourindex={this.props.hourIndex} className={cssClass}
+      <div data-hourindex={toPrettyHour(this.props.hourIndex)} className={cssClass}
            onClick={(this.props.status !== 2) ? this.hourToggle : null}>
       </div>
     );

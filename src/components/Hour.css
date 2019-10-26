@@ -4,6 +4,10 @@
     border-bottom: 1px solid black;
 }
 
+.Hour.class:hover {
+    cursor: not-allowed;
+}
+
 .Hour:hover:not(.class) {
     cursor: pointer;
 }

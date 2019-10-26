@@ -3,7 +3,7 @@ import "./Week.css"
 import Day from "./Day";
 import {connect} from "react-redux";
 import {hourInit} from "../redux/actions";
-import SimpleModal from "./Modal";
+// import SimpleModal from "./Modal";
 import {API_BASE} from "../constants"
 
 
@@ -106,27 +106,27 @@ class Week extends Component {
 
     return (
       <>
-        <button onClick={this.addClass}>
-          addClass
-
-        </button>
-        <select name="dayIndex" onChange={this.handleChange}>
-          <option value="0">Monday</option>
-          <option value="1">Tuesday</option>
-          <option value="2">Wednesday</option>
-          <option value="3">Thursday</option>
-          <option value="4">Friday</option>
-          <option value="5">Saturday</option>
-          <option value="6">Sunday</option>
-        </select>
-        <select name="start" onChange={this.handleChange}>
-          {hours}
-        </select>
-        <select name="end" onChange={this.handleChange}>
-          {hours}
-        </select>
-        <span className="key">
-          key
+        <div className="addClass">
+          <select name="dayIndex" onChange={this.handleChange}>
+            <option value="0">Monday</option>
+            <option value="1">Tuesday</option>
+            <option value="2">Wednesday</option>
+            <option value="3">Thursday</option>
+            <option value="4">Friday</option>
+            <option value="5">Saturday</option>
+            <option value="6">Sunday</option>
+          </select>
+          <select name="start" onChange={this.handleChange}>
+            {hours}
+          </select>
+          <select name="end" onChange={this.handleChange}>
+            {hours}
+          </select>
+          <button onClick={this.addClass}>
+            addClass
+          </button>
+        </div>
+        <div className="key">
           <span className="notAvailable">
             not available
           </span>
@@ -136,7 +136,7 @@ class Week extends Component {
           <span className="class">
             class
           </span>
-        </span>
+        </div>
         {/*<SimpleModal/>*/}
 
         <div className="Week">
